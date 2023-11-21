@@ -1,0 +1,78 @@
+.app__navbar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1rem;
+    /* border-radius: 10px 10px 0 0; */
+}
+
+.app__navbar-links_list {
+    display: flex;
+}
+
+.app__navbar-logo p {
+    font-family: var(--font-family);
+}
+
+
+.app__navbar-links_list li {
+    list-style: none;
+    padding: 0.5rem 0;
+    text-decoration: none;
+    margin: 0 1rem;
+    text-wrap: nowrap;
+    transition: 1s ease;
+}
+
+/* .app__navbar-links_list li:hover {
+    border-bottom: 1.5px solid #0755BE;
+} */
+
+.app__navbar-links_list-item a {
+    text-decoration: none;
+    color: #0755BE;
+    font-family: var(--font-family);
+}
+
+.app__navbar-login {
+    display: flex;
+}
+
+.login__btn {
+    font-family: var(--font-family);
+    color: var(--font-color);
+    padding: 1rem;
+    border-radius: 5px;
+    transition: 0.5s ease;
+    cursor: pointer;
+    margin-right: 0.5rem;
+    text-wrap: nowrap;
+
+}
+
+.login__btn:hover {
+    background: #B8D5F7;
+    /* box-shadow: var(--box-shadow) */
+}
+
+.register__btn {
+    background: #B8D5F7;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+
+    font-family: var(--font-family);
+    color: rgb(48, 46, 46);
+    padding: 1rem;
+    border-radius: 5px;
+    transition: 0.5s ease;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 850px) {
+    .app__navbar-links {
+        display: none;
+    }
+}

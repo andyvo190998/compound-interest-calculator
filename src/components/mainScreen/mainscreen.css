@@ -1,0 +1,51 @@
+.app__mainScreen {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: auto;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: var(--box-shadow)
+}
+
+.app__mainScreen-top {
+    background: linear-gradient(0deg, rgba(252, 244, 239, 1) 0%, rgba(213, 229, 247, 1) 100%);
+    border-radius: 10px 10px 0 0;
+    padding: 0 10rem 2rem 10rem;
+}
+
+.app__mainScreen-bottom {
+    width: 100%;
+    height: 10rem;
+    background: #ADCFF8;
+}
+
+@media screen and (max-width: 850px) {
+    .app__mainScreen-top {
+        padding: 0 2rem 1rem 2rem;
+    }
+
+    .app__mainScreen {
+        transform: translate(-45%, -50%);
+
+    }
+}
+
+@media screen and (max-height: 600px) {
+    .app__mainScreen {
+        transform: translate(-50%, -45%);
+    }
+}
+
+@media screen and (max-height: 500px) {
+    .app__mainScreen {
+        transform: translate(-50%, -35%);
+    }
+}
+
+@media screen and (max-height: 500px) {
+    .app__mainScreen {
+        transform: translate(-50%, -25%);
+    }
+}

@@ -1,0 +1,15 @@
+.app__background-top {
+  /* global 94%+ browsers support */
+  background: linear-gradient(
+    0deg,
+    rgba(227, 239, 252, 1) 0%,
+    rgba(173, 208, 247, 1) 100%
+  );
+
+  height: 70vh;
+}
+
+.app__background-bottom {
+  background: #4a88d3;
+  height: 30vh;
+}
