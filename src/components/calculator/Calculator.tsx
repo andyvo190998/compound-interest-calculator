@@ -54,6 +54,7 @@ const Calculator = () => {
         <p>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque,
           perferendis molestias. Neque reiciendis ullam laboriosam corporis
+          qweqwe
         </p>
 
         <form className="app__calculator-form_inputs" onSubmit={handleSubmit}>
