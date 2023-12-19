@@ -2,6 +2,7 @@ import React from 'react';
 import './mainscreen.css';
 import Navbar from '../navbar/Navbar';
 import Calculator from '../calculator/Calculator';
+import Chart from '../chart/Chart';
 
 const MainScreen = () => {
   return (
@@ -10,7 +11,9 @@ const MainScreen = () => {
         <Navbar />
         <Calculator />
       </div>
-      <div className="app__mainScreen-bottom"></div>
+      <div className="app__mainScreen-bottom">
+        <Chart />
+      </div>
     </div>
   );
 };
