@@ -5,9 +5,14 @@
     padding: 10px;
 }
 
-.app__chart-container_chart {}
+.app__chart-container_chart {
+    flex: 1;
 
-.app__chart-container_desc {}
+}
+
+.app__chart-container_desc {
+    flex: 0.5;
+}
 
 .app__chart-container_desc-detail {
     display: flex;
