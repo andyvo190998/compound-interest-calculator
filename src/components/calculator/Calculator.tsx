@@ -1,7 +1,8 @@
-import React, { ChangeEvent, FormEvent, useState } from 'react';
+import React, { ChangeEvent, FormEvent, useContext, useState } from 'react';
 import './calculator.css';
 import logo from '../../assets/logo.png';
 import { Button, TextField, Typography } from '@mui/material';
+import { GlobalContext } from '../../provider/GlobalProvider.jsx';
 
 const Calculator = () => {
   const [inputValues, setInputValues] = useState({
@@ -10,6 +11,9 @@ const Calculator = () => {
     investmentLength: 1,
     annualInterest: 0,
   });
+
+  const { setFutureValueArr } = useContext(GlobalContext);
+
   const handleSubmit = (e: FormEvent<HTMLInputElement>) => {
     e.preventDefault();
     const {
@@ -23,6 +27,35 @@ const Calculator = () => {
       1 + annualInterest / 100 / 1,
       1 * investmentLength
     );
+    let testArr = [];
+    let previousDeposit = 0;
+    let totalContribution = 0;
+    for (let i = 0; i <= investmentLength; i++) {
+      const powerPart1 = Math.pow(1 + annualInterest / 100 / 1, 1 * 1);
+      const withMonthlyContribution =
+        (monthlyContribution * (powerPart1 - 1)) / (annualInterest / 100 / 1);
+      if (i === 1) {
+        previousDeposit =
+          initialDeposit * powerPart1 + withMonthlyContribution * 12;
+        totalContribution = initialDeposit + monthlyContribution * 1 * 12;
+      } else {
+        totalContribution = totalContribution + monthlyContribution * 1 * 12;
+
+        previousDeposit =
+          previousDeposit * powerPart1 + withMonthlyContribution * 12;
+      }
+
+      testArr = [
+        ...testArr,
+        {
+          yearId: i,
+          depositValue: totalContribution,
+          futureValue: previousDeposit,
+        },
+      ];
+    }
+    setFutureValueArr(testArr);
+
     let futureValue = initialDeposit * powerPart;
     const contribution =
       initialDeposit + monthlyContribution * investmentLength * 12;
@@ -87,16 +120,15 @@ const Calculator = () => {
             name="annualInterest"
             type="number"
           />
-
-          <Button
-            sx={{ mt: 2, width: 'fit-content', marginLeft: 'auto' }}
-            variant="contained"
-            type="submit"
-            onClick={(e) => handleSubmit(e)}
-          >
-            Calculate
-          </Button>
         </form>
+        <Button
+          sx={{ mt: 2, width: 'fit-content', marginLeft: 'auto' }}
+          variant="contained"
+          type="submit"
+          onClick={(e) => handleSubmit(e)}
+        >
+          Calculate
+        </Button>
       </div>
     </div>
   );

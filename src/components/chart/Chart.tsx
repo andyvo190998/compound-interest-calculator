@@ -1,9 +1,11 @@
 import { Box, Typography } from '@mui/material';
 import { LineChart } from '@mui/x-charts';
 import './chart.css';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
+import { GlobalContext } from '../../provider/GlobalProvider.jsx';
 
 const Chart = () => {
+  const { futureValueArr } = useContext(GlobalContext);
   const uData = [4000, 3000, 2000, 2780, 1890, 2390, 3490];
   const pData = [2400, 1398, 9800, 3908, 4800, 3800, 4300];
   const xLabels = [
@@ -15,7 +17,24 @@ const Chart = () => {
     'Page F',
     'Page G',
   ];
+  const [totalContribution, setTotalContribution] = useState([]);
+  const [totalFutureValue, setTotalFutureValue] = useState([]);
+  const [years, setYears] = useState([]);
+
   const [windowWidth, seWindowWidth] = useState(window.innerWidth);
+  useEffect(() => {
+    let yearsOfInvestment = [];
+    let benefit = [];
+    let contribution = [];
+    futureValueArr.forEach((item) => {
+      yearsOfInvestment = [...yearsOfInvestment, item.yearId];
+      benefit = [...benefit, item.futureValue];
+      contribution = [...contribution, item.depositValue];
+    });
+    setYears(yearsOfInvestment);
+    setTotalFutureValue(benefit);
+    setTotalContribution(contribution);
+  }, [futureValueArr]);
   useEffect(() => {
     window.addEventListener('resize', () => seWindowWidth(window.innerWidth));
   }, []);
@@ -33,10 +52,10 @@ const Chart = () => {
           }
           height={300}
           series={[
-            { data: pData, label: 'pv' },
-            { data: uData, label: 'uv' },
+            { data: totalFutureValue, label: 'Future Value' },
+            { data: totalContribution, label: 'Total Contribution' },
           ]}
-          xAxis={[{ scaleType: 'point', data: xLabels }]}
+          xAxis={[{ scaleType: 'point', data: years }]}
         />
       </Box>
 
