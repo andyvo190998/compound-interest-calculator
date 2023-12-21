@@ -6,10 +6,8 @@ const GlobalContext = createContext({
 });
 
 const GlobalProvider = ({ children }) => {
-  // Your state and methods go here
   const [futureValueArr, setFutureValueArr] = useState([]);
 
-  // Provide the state and methods to the context
   const contextValue = {
     setFutureValueArr: setFutureValueArr,
     futureValueArr: futureValueArr,

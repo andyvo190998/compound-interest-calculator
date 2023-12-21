@@ -29,6 +29,8 @@
 }
 
 
+
+
 @media screen and (max-width: 850px) {
 
     .app__calculator-img {
@@ -39,6 +41,21 @@
         /* display: grid;
         grid-template-columns: repeat(2, 2fr); */
         grid-gap: 0.5rem;
+
+    }
+}
+
+
+@media screen and (max-width: 500px) {
+
+    /* .app__calculator-img {
+        display: none;
+    } */
+
+    .app__calculator-form_inputs {
+        /* display: grid; */
+        grid-template-columns: repeat(1, 2fr);
+        /* grid-gap: 0.5rem; */
 
     }
 }

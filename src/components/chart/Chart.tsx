@@ -20,6 +20,7 @@ const Chart = () => {
     }).format(number);
   };
   useEffect(() => {
+    console.log(futureValueArr);
     if (futureValueArr.length !== 0) {
       let yearsOfInvestment = [];
       let benefit = [];
@@ -71,18 +72,11 @@ const Chart = () => {
                 ? 2
                 : 1,
           }}
-          // width={
-          //   windowWidth > 1100
-          //     ? 500
-          //     : windowWidth >= 550 && windowWidth <= 1100
-          //     ? 400
-          //     : 300
-          // }
           height={300}
           series={[
             { label: 'Future Value', curve: 'linear', data: totalFutureValue },
             {
-              label: 'Total Contribution',
+              label: 'Total Investment',
               curve: 'linear',
               data: totalContribution,
             },
@@ -100,36 +94,28 @@ const Chart = () => {
       <Box className="app__chart-container_desc">
         <Typography sx={{ mb: 2 }}>Your savings:</Typography>
         <Box className="app__chart-container_desc-detail">
-          {/* <Box className="app__chart-container_label">
-            <Box className="app__chart-container_label-block">
-              <div className="circle" />
-              <div className="line" />
-              <div className="circle" />
-            </Box>
-
-            <Box className="app__chart-container_label-block">
-              <div className="circle-saving" />
-              <div className="line-saving" />
-              <div className="circle-saving" />
-            </Box>
-          </Box> */}
           <Box className="text-desc">
-            <Typography>Total Investment:</Typography>
-            <Typography>Investment Length:</Typography>
-            <Typography>Total interest:</Typography>
             <Typography>Future Value:</Typography>
+            <Typography>Total Investment:</Typography>
+            <Typography>Total Earn:</Typography>
+            <Typography>Investment Length:</Typography>
           </Box>
           <Box className="text-value">
+            <Typography>
+              {currencyFormat(totalFutureValue[totalFutureValue.length - 1])}
+            </Typography>
             <Typography>
               {currencyFormat(totalContribution[totalContribution.length - 1])}
             </Typography>
             <Typography>
+              {currencyFormat(
+                totalFutureValue[totalFutureValue.length - 1] -
+                  totalContribution[totalContribution.length - 1]
+              )}
+            </Typography>
+            <Typography>
               {years[years.length - 1]}{' '}
               {years[years.length - 1] > 1 ? 'years' : 'year'}
-            </Typography>
-            <Typography>$41,000</Typography>
-            <Typography>
-              {currencyFormat(totalFutureValue[totalFutureValue.length - 1])}
             </Typography>
           </Box>
         </Box>

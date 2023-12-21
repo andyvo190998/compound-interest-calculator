@@ -28,26 +28,27 @@
     }
 }
 
-@media screen and (min-height: 300px) {
+
+@media screen and (max-height: 950px) {
     .app__mainScreen {
-        transform: translate(-50%, -20%);
+        transform: translate(-50%, -33%);
 
     }
 }
 
-@media screen and (min-height: 400px) {
+/* @media screen and (min-height: 400px) {
     .app__mainScreen {
         transform: translate(-50%, -15%);
 
     }
-}
+} */
 
-@media screen and (min-height: 700px) {
+/* @media screen and (min-height: 700px) {
     .app__mainScreen {
         transform: translate(-50%, -40%);
 
     }
-}
+} */
 
 /*
 @media screen and (max-height: 800px) {
