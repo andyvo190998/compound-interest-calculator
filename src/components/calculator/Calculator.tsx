@@ -1,10 +1,12 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import './calculator.css';
 import logo from '../../assets/logo.png';
 import { Autocomplete, Button, TextField, Typography } from '@mui/material';
 import { GlobalContext } from '../../provider/GlobalProvider.jsx';
 import * as yup from 'yup';
 import { Form, Formik } from 'formik';
+import Help from '../helps/Helps.js';
+// import MoneyInput from '@rschpdr/react-money-input';
 
 const Calculator = () => {
   const validationSchema = yup.object({
@@ -23,10 +25,10 @@ const Calculator = () => {
 
   const compound_frequency = [
     { label: 'Annually' },
-    { label: 'Semiannually' },
-    { label: 'Quarterly' },
-    { label: 'Monthly' },
-    { label: 'Daily' },
+    // { label: 'Semiannually' },
+    // { label: 'Quarterly' },
+    // { label: 'Monthly' },
+    // { label: 'Daily' },
   ];
   const currency = [{ label: 'USD' }, { label: 'EUR' }, { label: 'VND' }];
 
@@ -40,6 +42,7 @@ const Calculator = () => {
   };
 
   const { setFutureValueArr } = useContext(GlobalContext);
+  const [open, setOpen] = useState(false);
 
   const handleSubmit = (props: {
     compound_frequency: { label: string };
@@ -57,11 +60,6 @@ const Calculator = () => {
       investmentLength,
       annual_interest_rate,
     } = props;
-
-    // const powerPart = Math.pow(
-    //   1 + annual_interest_rate / 100 / 1,
-    //   1 * investmentLength
-    // );
     let testArr: unknown[] = [];
     let previousDeposit = 0;
     let totalContribution = 0;
@@ -93,16 +91,6 @@ const Calculator = () => {
       ];
     }
     setFutureValueArr(testArr);
-
-    // let futureValue = initial_deposit * powerPart;
-    // const contribution =
-    //   initial_deposit + monthly_contribution * investmentLength * 12;
-    // let withMonthlyContribution = 0;
-    // if (monthly_contribution > 0) {
-    //   withMonthlyContribution =
-    //     (monthly_contribution * (powerPart - 1)) /
-    //     (annual_interest_rate / 100 / 1);
-    // }
   };
 
   return (
@@ -114,9 +102,17 @@ const Calculator = () => {
       <div className="app__calculator-form">
         <Typography variant="h5">Compound interest calculator</Typography>
         <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque,
-          perferendis molestias. Neque reiciendis ullam laboriosam corporis
-          qweqwe
+          Need help? 👉👉👉{' '}
+          <span
+            style={{
+              color: 'blue',
+              textDecoration: 'underline',
+              cursor: 'pointer',
+            }}
+            onClick={() => setOpen(true)}
+          >
+            click here
+          </span>
         </p>
         <Formik
           initialValues={initialValues}
@@ -158,7 +154,9 @@ const Calculator = () => {
                   id="currency"
                   // name="compound_frequency"
                   value={formik.values.currency}
-                  onChange={formik.handleChange}
+                  onChange={(e, newValue) => {
+                    formik.setFieldValue('currency', newValue);
+                  }}
                   onBlur={formik.handleBlur}
                   error="false"
                   options={currency}
@@ -168,6 +166,7 @@ const Calculator = () => {
                 />
 
                 <TextField
+                  // customInput={TextField}
                   id="initial_deposit"
                   name="initial_deposit"
                   value={formik.values.initial_deposit}
@@ -251,6 +250,7 @@ const Calculator = () => {
           )}
         </Formik>
       </div>
+      <Help open={open} setOpen={setOpen} />
     </div>
   );
 };

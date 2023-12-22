@@ -11,20 +11,33 @@ const Chart = () => {
   const [totalFutureValue, setTotalFutureValue] = useState([0]);
   const [years, setYears] = useState([0]);
   const [windowWidth, seWindowWidth] = useState(window.innerWidth);
+  const [selectedCurrency, setSelectedCurrency] = useState('');
 
   const currencyFormat = (number: number) => {
-    console.log(number);
-    return new Intl.NumberFormat('de-DE', {
-      style: 'currency',
-      currency: 'EUR',
-    }).format(number);
+    console.log(selectedCurrency);
+    if (selectedCurrency === 'EUR') {
+      return new Intl.NumberFormat('de-DE', {
+        style: 'currency',
+        currency: 'EUR',
+      }).format(number);
+    } else if (selectedCurrency === 'USD') {
+      return new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD',
+      }).format(number);
+    } else {
+      return new Intl.NumberFormat('it-IT', {
+        style: 'currency',
+        currency: 'VND',
+      }).format(number);
+    }
   };
   useEffect(() => {
-    console.log(futureValueArr);
     if (futureValueArr.length !== 0) {
       let yearsOfInvestment = [];
       let benefit = [];
       let contribution = [];
+      setSelectedCurrency(futureValueArr[0].currency.label);
       futureValueArr.forEach((item) => {
         yearsOfInvestment = [...yearsOfInvestment, item.yearId];
         benefit = [...benefit, item.futureValue];
