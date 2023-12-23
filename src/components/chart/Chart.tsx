@@ -2,7 +2,15 @@ import { Box, Typography } from '@mui/material';
 import { LineChart } from '@mui/x-charts';
 import './chart.css';
 import { useContext, useEffect, useState } from 'react';
-import { GlobalContext } from '../../provider/GlobalProvider.jsx';
+import { GlobalContext } from '../../provider/GlobalProvider.tsx';
+
+interface futureValueProps {
+  compound_frequency: { label: string };
+  currency: { label: string };
+  depositValue: number;
+  futureValue: number;
+  yearId: number;
+}
 
 const Chart = () => {
   const { futureValueArr } = useContext(GlobalContext);
@@ -10,11 +18,9 @@ const Chart = () => {
   const [totalContribution, setTotalContribution] = useState([0]);
   const [totalFutureValue, setTotalFutureValue] = useState([0]);
   const [years, setYears] = useState([0]);
-  const [windowWidth, seWindowWidth] = useState(window.innerWidth);
   const [selectedCurrency, setSelectedCurrency] = useState('');
 
   const currencyFormat = (number: number) => {
-    console.log(selectedCurrency);
     if (selectedCurrency === 'EUR') {
       return new Intl.NumberFormat('de-DE', {
         style: 'currency',
@@ -34,11 +40,12 @@ const Chart = () => {
   };
   useEffect(() => {
     if (futureValueArr.length !== 0) {
-      let yearsOfInvestment = [];
-      let benefit = [];
-      let contribution = [];
+      let yearsOfInvestment: number[] = [];
+      let benefit: number[] = [];
+      let contribution: number[] = [];
+      // @ts-expect-error: Unreachable code error
       setSelectedCurrency(futureValueArr[0].currency.label);
-      futureValueArr.forEach((item) => {
+      futureValueArr.forEach((item: futureValueProps) => {
         yearsOfInvestment = [...yearsOfInvestment, item.yearId];
         benefit = [...benefit, item.futureValue];
         contribution = [...contribution, Math.round(item.depositValue)];
@@ -48,9 +55,6 @@ const Chart = () => {
       setTotalContribution(contribution);
     }
   }, [futureValueArr]);
-  useEffect(() => {
-    window.addEventListener('resize', () => seWindowWidth(window.innerWidth));
-  }, []);
   return (
     <Box className="app__chart-container">
       <Box className="app__chart-container_chart">

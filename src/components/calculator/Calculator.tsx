@@ -2,24 +2,21 @@ import { useContext, useState } from 'react';
 import './calculator.css';
 import logo from '../../assets/logo.png';
 import { Autocomplete, Button, TextField, Typography } from '@mui/material';
-import { GlobalContext } from '../../provider/GlobalProvider.jsx';
+import { GlobalContext } from '../../provider/GlobalProvider.tsx';
 import * as yup from 'yup';
 import { Form, Formik } from 'formik';
 import Help from '../helps/Helps.js';
-// import MoneyInput from '@rschpdr/react-money-input';
 
 const Calculator = () => {
   const validationSchema = yup.object({
-    currency: yup.string('Select currency'),
-    compound_frequency: yup.string('Select compound frequency'),
+    currency: yup.string(),
+    compound_frequency: yup.string(),
     // .required('Compound frequency required'),
-    initial_deposit: yup.number('Type initial deposit'),
-    monthly_contribution: yup.number('Type monthly contribution'),
-    investmentLength: yup
-      .number('Type investment length')
-      .required('Investment length required'),
+    initial_deposit: yup.number(),
+    monthly_contribution: yup.number(),
+    investmentLength: yup.number().required(),
     annual_interest_rate: yup
-      .number('Select annual interest rate')
+      .number()
       .required('Annual interest rate required'),
   });
 
@@ -42,7 +39,7 @@ const Calculator = () => {
   };
 
   const { setFutureValueArr } = useContext(GlobalContext);
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState<boolean>(false);
 
   const handleSubmit = (props: {
     compound_frequency: { label: string };
@@ -90,6 +87,7 @@ const Calculator = () => {
         },
       ];
     }
+    // @ts-expect-error: Unreachable code error
     setFutureValueArr(testArr);
   };
 
@@ -128,10 +126,11 @@ const Calculator = () => {
                   disablePortal
                   id="compound_frequency"
                   value={formik.values.compound_frequency}
-                  onChange={(e, newValue) => {
+                  onChange={(_e, newValue) => {
                     formik.setFieldValue('compound_frequency', newValue);
                   }}
                   onBlur={formik.handleBlur}
+                  // @ts-expect-error: Unreachable code error
                   error={
                     formik.touched.compound_frequency &&
                     Boolean(formik.errors.compound_frequency)
@@ -154,10 +153,11 @@ const Calculator = () => {
                   id="currency"
                   // name="compound_frequency"
                   value={formik.values.currency}
-                  onChange={(e, newValue) => {
+                  onChange={(_e, newValue) => {
                     formik.setFieldValue('currency', newValue);
                   }}
                   onBlur={formik.handleBlur}
+                  // @ts-expect-error: Unreachable code error
                   error="false"
                   options={currency}
                   renderInput={(params) => (
@@ -176,6 +176,7 @@ const Calculator = () => {
                     formik.touched.initial_deposit &&
                     Boolean(formik.errors.initial_deposit)
                   }
+                  // @ts-expect-error: Unreachable code error
                   helpertext={
                     formik.touched.initial_deposit &&
                     formik.errors.initial_deposit
@@ -193,6 +194,7 @@ const Calculator = () => {
                     formik.touched.monthly_contribution &&
                     Boolean(formik.errors.monthly_contribution)
                   }
+                  // @ts-expect-error: Unreachable code error
                   helpertext={
                     formik.touched.monthly_contribution &&
                     formik.errors.monthly_contribution
@@ -212,6 +214,7 @@ const Calculator = () => {
                     formik.touched.investmentLength &&
                     Boolean(formik.errors.investmentLength)
                   }
+                  // @ts-expect-error: Unreachable code error
                   helpertext={
                     formik.touched.investmentLength &&
                     formik.errors.investmentLength
@@ -229,6 +232,7 @@ const Calculator = () => {
                     formik.touched.annual_interest_rate &&
                     Boolean(formik.errors.annual_interest_rate)
                   }
+                  // @ts-expect-error: Unreachable code error
                   helpertext={
                     formik.touched.annual_interest_rate &&
                     formik.errors.annual_interest_rate

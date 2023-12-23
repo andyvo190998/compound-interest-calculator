@@ -1,4 +1,3 @@
-import React from 'react';
 import './mainscreen.css';
 import Navbar from '../navbar/Navbar';
 import Calculator from '../calculator/Calculator';

@@ -1,4 +1,3 @@
-import React from 'react';
 import './navbar.css';
 import mainLogo from '../../assets/main-logo.png';
 
